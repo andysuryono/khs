@@ -180,6 +180,74 @@ class StudyAPIController extends AppBaseController
         }  
     }
 
+    public function cetakSemua(Request $request)
+    {
+        $studies = Study::with('mahasiswa');        
+        if($id_mahasiswa = $request->get('id_mahasiswa')){
+            $studies->where('id_mahasiswa',$id_mahasiswa);
+            $mahasiswa = Mahasiswa::where('id',$id_mahasiswa)->first();
+        }
+
+        if($id_matakuliah = $request->get('id_matakuliah')){
+            $studies->where('id_matakuliah',$id_matakuliah);
+        }
+
+        $studies = $studies->get();
+        
+        $jumlah_sks = 0;
+        $jumlah_mutu = 0;
+        $nama_mahasiswa = "";
+
+        if($studies->count() > 0){
+            foreach ($studies as $key => $value) {
+                $jumlah_sks = $jumlah_sks + $value->matakuliah->sks;
+                $jumlah_mutu = $jumlah_mutu + $value->nilai;
+                // $nama_mahasiswa = $value->mahasiswa->nama;
+                $studies[$key] = [
+                    'id' => $value->id,
+                    'id_semester' => $value->id_semester,
+                    'id_matakuliah' => $value->id_matakuliah,
+                    'id_mahasiswa' => $value->id_mahasiswa,
+                    'mahasiswa' => $value->mahasiswa->nama,
+                    'nim' => $value->mahasiswa->nim,
+                    'matakuliah' => $value->matakuliah->nama,
+                    'dosen' => $value->matakuliah->dosen->nama,
+                    'kode' => $value->matakuliah->kode,
+                    'semester' => $value->semester->nama,
+                    'sks' => $value->matakuliah->sks,
+                    'nilai' => $value->nilai,
+                 ];
+            }
+           $sisa = 20 - $jumlah_sks;
+            if($sisa < 0){
+                return $res = [
+                    'success' => false,
+                    'message' => "Anda Melebihi batas minimum SKS",
+                    ];
+              }
+            $ipk = $jumlah_mutu / $jumlah_sks;
+
+          $data = [
+            'studies' => $studies,
+            'nama' => $mahasiswa,
+            'jumlah_sks' => $jumlah_sks,
+            'sisa_sks' => $sisa,
+            'jumlah_mutu' => $jumlah_mutu,
+            'ipk' => $ipk,
+            'message' => "Data berhasil di ambil",
+            ];        
+             // return $this->render('report.hasil_study',array('data' => $mahasiswa));
+        $pdf = \PDF::loadView('report.hasil_study_semua', array('studies' => $studies,'mahasiswa' => $mahasiswa,'data' => $data) );
+            return $pdf->stream('hasil_study.pdf');
+        }else{
+            return $res = [
+            'success' => false,
+            'data' => $studies,
+            'message' => "Data tidak ditemukan",
+            ];
+        }  
+    }
+
     /**
      * Store a newly created Study in storage.
      * POST /studies

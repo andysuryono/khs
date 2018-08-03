@@ -30,6 +30,7 @@ Route::resource('semesters', 'SemesterAPIController');
 
 Route::resource('studies', 'StudyAPIController');
 Route::get('cetak', 'StudyAPIController@cetak');
+Route::get('cetak-semua', 'StudyAPIController@cetakSemua');
 
 Route::resource('admins', 'AdminAPIController');
 Route::post('login', 'LoginController@login');
