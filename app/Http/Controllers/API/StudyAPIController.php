@@ -261,13 +261,12 @@ class StudyAPIController extends AppBaseController
         $id_semester = $request->input('id_semester');
         $id_mahasiswa = $request->input('id_mahasiswa');
         $id_matakuliah = $request->input('id_matakuliah');
-        $check = Study::where('id_semester',$id_semester)
-                        ->where('id_mahasiswa',$id_mahasiswa)
+        $check = Study::where('id_mahasiswa',$id_mahasiswa)
                         ->where('id_matakuliah',$id_matakuliah)->get();
         if($check->count() > 0){
             return $res = [
             'success' => false,
-            'message' => "Ada sudah pernah mengambil matakuliah ini di semester yang sama",
+            'message' => "Ada sudah pernah mengambil matakuliah ini",
             ];
         }else{
             $input = $request->all();
