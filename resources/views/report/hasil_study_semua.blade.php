@@ -134,7 +134,7 @@
                              <tr>
                     </table>
                     <p style="text-align: center; ">
-                        Indeks Prestasi Semester :  <b>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{{$data['ipk']}} </b>
+                        Indeks Prestasi Kumulatif :  <b>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{{$data['ipk']}} </b>
                     </p>
                    
 </body>
