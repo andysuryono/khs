@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>InfyOm Generator</title>
+    <title>KHS ONLINE</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -17,31 +17,40 @@
     @yield('css')
 </head>
 
-<body class="skin-blue sidebar-mini">
+<body class="skin-red-light layout-top-nav">
 <div class="wrapper">
     <!-- Main Header -->
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="#" class="logo">
-            <b>InfyOm</b>
-        </a>
+       
 
         <!-- Header Navbar -->
         <nav class="navbar navbar-static-top" role="navigation">
             <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+
+                 <a href="#" class="logo">
+                    <b>KHS ONLINE</b>
+                </a>
+            {{-- <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                 <span class="sr-only">Toggle navigation</span>
-            </a>
-            <!-- Navbar Right Menu -->
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
+            </a> --}}
+            <ul class="nav navbar-nav">
+                    @include('layouts.menu')
+            </ul>
+           {{--  <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" id="navbar-search-input" placeholder="Search">
+              </div>
+            </form> --}}
+            <ul class="nav navbar-nav navbar-right">
                     <!-- User Account Menu -->
                     <li class="dropdown user user-menu">
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="http://infyom.com/images/logo/blue_logo_150x150.jpg"
+                            <img src="img/stimik.jpeg"
                                  class="user-image" alt="User Image"/>
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">{!! Auth::user()->name !!}</span>
@@ -49,11 +58,11 @@
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="http://infyom.com/images/logo/blue_logo_150x150.jpg"
+                                <img src="img/stimik.jpeg"
                                      class="img-circle" alt="User Image"/>
                                 <p>
                                     {!! Auth::user()->name !!}
-                                    <small>Member since {!! Auth::user()->created_at->format('M. Y') !!}</small>
+                                  
                                 </p>
                             </li>
                             <!-- Menu Footer-->
@@ -75,12 +84,18 @@
                         </ul>
                     </li>
                 </ul>
+
+          </div><!-- /.navbar-collapse -->
+            
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                
             </div>
         </nav>
     </header>
 
     <!-- Left side column. contains the logo and sidebar -->
-@include('layouts.sidebar')
+{{-- @include('layouts.sidebar') --}}
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         @yield('content')
@@ -88,7 +103,7 @@
 
     <!-- Main Footer -->
     <footer class="main-footer" style="max-height: 100px;text-align: center">
-        <strong>Copyright © 2016 <a href="http://infyom.com" target="_blank">InfyOm Technologies</a>.</strong> All rights reserved.
+        <strong>KHS ONLINE SEKOLAH TINGGI MANAGEMENT INFORMATIKA</strong>
     </footer>
 
 </div>

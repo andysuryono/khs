@@ -1,8 +1,8 @@
 <!-- Id Field -->
-<div class="form-group">
+{{-- <div class="form-group">
     {!! Form::label('id', 'Id:') !!}
     <p>{!! $mataKuliah->id !!}</p>
-</div>
+</div> --}}
 
 <!-- Kode Field -->
 <div class="form-group">
@@ -24,19 +24,19 @@
 
 <!-- Id Dosen Field -->
 <div class="form-group">
-    {!! Form::label('id_dosen', 'Id Dosen:') !!}
-    <p>{!! $mataKuliah->id_dosen !!}</p>
+    {!! Form::label('id_dosen', 'Dosen:') !!}
+    <p>{!! $mataKuliah->dosen->nama !!}</p>
 </div>
 
 <!-- Created At Field -->
-<div class="form-group">
+{{-- <div class="form-group">
     {!! Form::label('created_at', 'Created At:') !!}
     <p>{!! $mataKuliah->created_at !!}</p>
 </div>
 
-<!-- Updated At Field -->
+Updated At Field
 <div class="form-group">
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{!! $mataKuliah->updated_at !!}</p>
-</div>
+</div> --}}
 

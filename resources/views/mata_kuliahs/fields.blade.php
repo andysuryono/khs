@@ -17,9 +17,14 @@
 </div>
 
 <!-- Id Dosen Field -->
-<div class="form-group col-sm-6">
+{{-- <div class="form-group col-sm-6">
     {!! Form::label('id_dosen', 'Id Dosen:') !!}
     {!! Form::text('id_dosen', null, ['class' => 'form-control']) !!}
+</div> --}}
+
+<div class="form-group col-sm-6">
+    {!! Form::label('id_dosen', 'Dosen:') !!}
+    {{ Form::select('id_dosen', $items = App\Models\Dosen::pluck('nama', 'id'), null, array('class'=>'form-control','style'=>'' )) }}
 </div>
 
 <!-- Submit Field -->
