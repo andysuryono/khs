@@ -39,10 +39,13 @@ class StudyAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $studies = Study::with('mahasiswa');                
+        $studies = Study::with('mahasiswa');
+        $checkMahasiswa = false;
+        $checkDosen = false;                
         if($id_mahasiswa = $request->get('id_mahasiswa')){
             $studies->where('id_mahasiswa',$id_mahasiswa);
             $mahasiswa = Mahasiswa::where('id',$id_mahasiswa)->first();
+            $checkMahasiswa = true;
         }
 
         if($id_semester = $request->get('id_semester')){
@@ -51,6 +54,7 @@ class StudyAPIController extends AppBaseController
 
         if($id_matakuliah = $request->get('id_matakuliah')){
             $studies->where('id_matakuliah',$id_matakuliah);
+            $checkDosen = true;
         }
 
         $studies = $studies->get();
@@ -76,35 +80,39 @@ class StudyAPIController extends AppBaseController
                     'nilai' => $value->nilai,
                  ];
             }
-        $sisa = 20 - $jumlah_sks;
-            if($sisa < 0){
-                return $res = [
-                    'success' => false,
-                    'message' => "Anda Melebihi batas minimum SKS",
-                    ];
-              }
-         $ipk = $jumlah_mutu / $jumlah_sks;
-        return $res = [
-            'success' => true,
-            'data' => $studies,
-            'nama' => $mahasiswa,
-            'jumlah_sks' => $jumlah_sks,
-            'sisa_sks' => $sisa,
-            'jumlah_mutu' => $jumlah_mutu,
-            'ipk' => $ipk,
-            'message' => "Data berhasil di ambil",
-            ];
-        }else{
+            if($checkMahasiswa){
+            $sisa = 20 - $jumlah_sks;
+                if($sisa < 0){
+                    return $res = [
+                        'success' => false,
+                        'message' => "Anda Melebihi batas minimum SKS",
+                        ];
+                  }
+             $ipk = $jumlah_mutu / $jumlah_sks;
             return $res = [
-            'success' => false,
-            'data' => $studies,
-            'message' => "Data tidak ditemukan",
-            ];
+                'success' => true,
+                'data' => $studies,
+                'nama' => $mahasiswa,
+                'jumlah_sks' => $jumlah_sks,
+                'sisa_sks' => $sisa,
+                'jumlah_mutu' => $jumlah_mutu,
+                'ipk' => $ipk,
+                'message' => "Data berhasil di ambil",
+                ];
+            }elseif ($checkDosen) {
+                return $res = [
+                'success' => true,
+                'data' => $studies,
+                'message' => "Data berhasil di ambil",
+                ];
+            }else{
+                return $res = [
+                'success' => false,
+                'data' => $studies,
+                'message' => "Data tidak ditemukan",
+                ];
+            }
         }
-
-        
-
-       
     }
 
      public function cetak(Request $request)
