@@ -1,3 +1,7 @@
+<div class="form-group col-sm-6">
+    {!! Form::label('id_jurusan', 'Jurusan:') !!}
+    {{ Form::select('id_jurusan', $items = App\Models\Jurusan::pluck('nama', 'id'), null, array('class'=>'form-control','style'=>'' )) }}
+</div>
 <!-- Nama Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('nama', 'Nama:') !!}
